@@ -89,8 +89,8 @@ class CustomView @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        canvas.drawArc(mCircleRect, OFFSET, 360f + OFFSET, false, circlePaint)
-        canvas.drawArc(mCircleRect, OFFSET, 180 + OFFSET, false, progressPaint)
+        canvas.drawArc(mCircleRect, OFFSET, 360f, false, circlePaint)
+        canvas.drawArc(mCircleRect, OFFSET, 180f, false, progressPaint)
 
         val blobPosX = mTranslateX + mBackgroundCircleRadius * cos(180 + OFFSET)
         val blobPosY = mTranslateY + mBackgroundCircleRadius * sin(180 + OFFSET)
