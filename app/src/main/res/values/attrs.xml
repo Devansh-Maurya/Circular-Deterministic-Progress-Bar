@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <declare-styleable name="CustomView">
-        <attr name="blobColor" format="color" />
-        <attr name="progressColor" format="color" />
-        <attr name="backgroundCircleColor" format="color" />
-        <attr name="backgroundCircleWidth" format="dimension" />
-    </declare-styleable>
-</resources>
