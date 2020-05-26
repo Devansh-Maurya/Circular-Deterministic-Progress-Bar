@@ -8,6 +8,7 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
 import maurya.devansh.myapplication.R
+import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.min
 import kotlin.math.sin
@@ -92,8 +93,10 @@ class CustomView @JvmOverloads constructor(
         canvas.drawArc(mCircleRect, OFFSET, 360f, false, circlePaint)
         canvas.drawArc(mCircleRect, OFFSET, 180f, false, progressPaint)
 
-        val blobPosX = mTranslateX + mBackgroundCircleRadius * cos(180 + OFFSET)
-        val blobPosY = mTranslateY + mBackgroundCircleRadius * sin(180 + OFFSET)
-//        canvas.drawCircle(blobPosX, blobPosY, 20f, )
+        val blobPosX = mTranslateX + mBackgroundCircleRadius * cos((180f + OFFSET).toRadians())
+        val blobPosY = mTranslateY + mBackgroundCircleRadius * sin((180f + OFFSET).toRadians())
+        canvas.drawCircle(blobPosX, blobPosY, 30f, blobPaint)
     }
+
+    private fun Float.toRadians(): Float = (this / 180) * PI.toFloat()
 }
