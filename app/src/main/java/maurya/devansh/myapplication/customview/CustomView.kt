@@ -1,10 +1,12 @@
 package maurya.devansh.myapplication.customview
 
+import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import maurya.devansh.myapplication.R
@@ -35,6 +37,8 @@ class CustomView @JvmOverloads constructor(
     private val circlePaint: Paint
     private val progressPaint: Paint
     private val blobPaint: Paint
+
+    private var mProgressAngle = 0f
 
     companion object {
         private const val OFFSET = -90f
@@ -91,11 +95,27 @@ class CustomView @JvmOverloads constructor(
         super.onDraw(canvas)
 
         canvas.drawArc(mCircleRect, OFFSET, 360f, false, circlePaint)
-        canvas.drawArc(mCircleRect, OFFSET, 180f, false, progressPaint)
+        canvas.drawArc(mCircleRect, OFFSET, mProgressAngle, false, progressPaint)
 
-        val blobPosX = mTranslateX + mBackgroundCircleRadius * cos((180f + OFFSET).toRadians())
-        val blobPosY = mTranslateY + mBackgroundCircleRadius * sin((180f + OFFSET).toRadians())
+        // Use polar equation of circle to get X and Y coordinates of blob marker
+        val blobPosX = mTranslateX + mBackgroundCircleRadius * cos((mProgressAngle + OFFSET).toRadians())
+        val blobPosY = mTranslateY + mBackgroundCircleRadius * sin((mProgressAngle + OFFSET).toRadians())
         canvas.drawCircle(blobPosX, blobPosY, 30f, blobPaint)
+    }
+
+    fun setProgress(value: Int) {
+        // Restrict max progress to 100
+        val progress = min(value, 100)
+
+        val animator = ValueAnimator.ofInt(0, progress).apply {
+            duration = 1000
+            addUpdateListener {
+                mProgressAngle = 3.6f * it.animatedValue as Int
+                Log.d("CustomAnimator", mProgressAngle.toString())
+                invalidate()
+            }
+        }
+        animator.start()
     }
 
     private fun Float.toRadians(): Float = (this / 180) * PI.toFloat()
