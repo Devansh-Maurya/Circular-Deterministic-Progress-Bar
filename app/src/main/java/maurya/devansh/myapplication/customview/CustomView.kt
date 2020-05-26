@@ -107,10 +107,10 @@ class CustomView @JvmOverloads constructor(
         // Restrict max progress to 100
         val progress = min(value, 100)
 
-        val animator = ValueAnimator.ofInt(0, progress).apply {
+        val animator = ValueAnimator.ofFloat(0f, progress.toFloat()).apply {
             duration = 1000
             addUpdateListener {
-                mProgressAngle = 3.6f * it.animatedValue as Int
+                mProgressAngle = 3.6f * it.animatedValue as Float
                 Log.d("CustomAnimator", mProgressAngle.toString())
                 invalidate()
             }
