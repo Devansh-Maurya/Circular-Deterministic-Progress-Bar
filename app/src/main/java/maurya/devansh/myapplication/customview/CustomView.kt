@@ -6,7 +6,6 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import maurya.devansh.myapplication.R
@@ -114,7 +113,6 @@ class CustomView @JvmOverloads constructor(
             duration = 1000
             addUpdateListener {
                 mProgressAngle = it.animatedValue as Float
-                Log.d("CustomAnimator", mProgressAngle.toString())
                 invalidate()
             }
         }
