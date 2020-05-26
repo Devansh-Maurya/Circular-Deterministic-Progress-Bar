@@ -39,6 +39,7 @@ class CustomView @JvmOverloads constructor(
     private val blobPaint: Paint
 
     private var mProgressAngle = 0f
+    private var mPreviousAngle = 0f
 
     companion object {
         private const val OFFSET = -90f
@@ -105,12 +106,14 @@ class CustomView @JvmOverloads constructor(
 
     fun setProgress(value: Int) {
         // Restrict max progress to 100
+        mPreviousAngle = mProgressAngle
         val progress = min(value, 100)
+        val maxProgressAngle = 3.6f * progress
 
-        val animator = ValueAnimator.ofFloat(0f, progress.toFloat()).apply {
+        val animator = ValueAnimator.ofFloat(mPreviousAngle, maxProgressAngle).apply {
             duration = 1000
             addUpdateListener {
-                mProgressAngle = 3.6f * it.animatedValue as Float
+                mProgressAngle = it.animatedValue as Float
                 Log.d("CustomAnimator", mProgressAngle.toString())
                 invalidate()
             }
