@@ -1,6 +1,6 @@
 # Circular Deterministic Progress Bar
 
-## A circular progress bar with scrub which can be set at a definite position. Can be used to indicate deterministic progress.
+#### A circular progress bar with scrub which can be set at a definite position. Can be used to indicate deterministic progress.
 
 #### [Download APK](https://github.com/Devansh-Maurya/Unacademy-Android-Assignment/raw/master/description/MyApplication.apk)
 
